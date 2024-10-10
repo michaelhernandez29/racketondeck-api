@@ -35,20 +35,9 @@ const nodeRules = {
 
 export default [
   {
-    languageOptions: {
-      globals: {
-        ...globals.node,
-        ...globals.jest,
-      },
-    },
-    plugins: {
-      jsdoc: pluginJsdoc,
-      node: pluginNode,
-    },
-    rules: {
-      ...jsdocRules,
-      ...nodeRules,
-    },
+    languageOptions: { globals: globals.node },
+    plugins: { jsdoc: pluginJsdoc, node: pluginNode },
+    rules: { ...jsdocRules, ...nodeRules },
   },
   pluginJs.configs.recommended,
 ];

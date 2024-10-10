@@ -1,18 +1,11 @@
-import path from 'path';
-import url from 'url';
+const ENV = process.env;
 
-import logger from '../helpers/logger';
-
-const __filename = url.fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const file = `${__dirname}/config.js`;
-
-let env;
-try {
-  env((await import(file)?.default) ?? {});
-} catch (error) {
-  logger.error({ message: 'ERROR; No configuration file found', error });
-}
-
-export default env;
+export default {
+  app: {
+    env: ENV.ENV || 'dev',
+    port: ENV.PORT || 3616,
+  },
+  winston: {
+    level: ENV.LEVEL ?? 'info',
+  },
+};

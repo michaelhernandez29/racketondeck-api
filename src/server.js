@@ -4,12 +4,22 @@ import compression from 'compression';
 import cors from 'cors';
 import helmet from 'helmet';
 
-const server = express();
+import logger from './helpers/logger.js';
 
-server.use(express.json());
-server.use(express.urlencoded({ extended: false }));
-server.use(helmet());
-server.use(cors({ origin: '*', methods: ['GET', 'POST', 'PUT', 'DELETE'] }));
-server.use(compression);
+import config from './config/index.js';
+const appConfig = config.app;
 
-export default server;
+const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(helmet());
+app.use(cors({ origin: '*', methods: ['GET', 'POST', 'PUT', 'DELETE'] }));
+app.use(compression);
+
+const PORT = appConfig.port;
+app.listen(PORT, () => {
+  logger.info(`Server listening on port ${PORT}`);
+});
+
+export default app;

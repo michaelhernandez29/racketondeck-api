@@ -10,5 +10,9 @@
     "source.sortImports": "always"
   },
   "editor.rulers": [120],
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "editor.trimAutoWhitespace": true
 }

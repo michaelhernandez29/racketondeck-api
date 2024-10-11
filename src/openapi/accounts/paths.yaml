@@ -8,6 +8,8 @@
 
       Each account can have multiple users and academies, with customizable permissions for accessing specific
       academies. 📚
+    x-eov-operation-handler: accountController
+    operationId: create
     requestBody:
       $ref: '#/components/requestBodies/AccountPostRequestBody'
     responses:

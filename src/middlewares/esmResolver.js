@@ -14,7 +14,7 @@ const handlersCache = {};
  * @param {object} apiDoc - The OpenAPI specification document.
  * @returns {Function} - An Express middleware function that invokes the appropriate handler.
  */
-const esmresolver = (handlersPath, route, apiDoc) => {
+const esmResolver = (handlersPath, route, apiDoc) => {
   const { basePath, expressRoute, openApiRoute, method } = route;
   const pathKey = openApiRoute.substring(basePath.length);
   const schema = apiDoc.paths[pathKey][method.toLowerCase()];
@@ -40,18 +40,19 @@ const esmresolver = (handlersPath, route, apiDoc) => {
     }
   }
 
-  return (req, res, next) => {
-    handlersCache[cacheKey]
-      .then((module) => {
-        if (!module[oId]) {
-          throw Error(
-            `Could not find 'x-eov-operation-handler' with id ${oId} in module '${baseName}'. Make sure operation '${oId}' defined in your API spec exists as a handler function in '${baseName}'.`
-          );
-        }
-        return module[oId](req, res, next);
-      })
-      .catch(next);
+  return async (req, res, next) => {
+    try {
+      const module = await handlersCache[cacheKey];
+      if (!module[oId]) {
+        throw Error(
+          `Could not find 'x-eov-operation-handler' with id ${oId} in module '${baseName}'. Make sure operation '${oId}' defined in your API spec exists as a handler function in '${baseName}'.`
+        );
+      }
+      await module[oId](req, res, next);
+    } catch (error) {
+      next(error);
+    }
   };
 };
 
-export default esmresolver;
+export default esmResolver;

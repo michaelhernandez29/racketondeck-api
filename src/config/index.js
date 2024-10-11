@@ -8,6 +8,11 @@ export default {
   winston: {
     level: ENV.LEVEL ?? 'info',
   },
+  crypto: {
+    bcrypt: {
+      saltRounds: Number.parseInt(ENV.SALT_ROUNDS, 10) || 10,
+    },
+  },
   databases: {
     sequelize: {
       database: ENV.POSTGRES_DATABASE || 'racketondeck',

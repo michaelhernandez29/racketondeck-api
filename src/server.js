@@ -11,9 +11,11 @@ import url from 'url';
 import logger from './helpers/logger.js';
 import openapi from './helpers/openapi.js';
 import postgres from './lib/databases/postgres.js';
-import esmresolver from './middlewares/esmresolver.js';
+import errorHandler from './middlewares/errorHandler.js';
+import esmResolver from './middlewares/esmResolver.js';
 
 import config from './config/index.js';
+import requestHandler from './middlewares/requestHandler.js';
 const appConfig = config.app;
 
 const __filename = url.fileURLToPath(import.meta.url);
@@ -32,6 +34,8 @@ try {
   app.use(cors({ origin: '*', methods: ['GET', 'POST', 'PUT', 'DELETE'] }));
   app.use(compression());
 
+  app.use(requestHandler);
+
   app.use('/v1/api-docs', swaggerUi.serve, swaggerUi.setup(apiSpecContent));
   app.use(
     openapiValidator.middleware({
@@ -41,10 +45,12 @@ try {
       operationIdRequired: true,
       operationHandlers: {
         basePath: path.join(__dirname, 'controllers'),
-        resolver: esmresolver,
+        resolver: esmResolver,
       },
     })
   );
+
+  app.use(errorHandler);
 
   const PORT = appConfig.port;
   app.listen(PORT, () => {

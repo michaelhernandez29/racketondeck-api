@@ -7,8 +7,8 @@ import User from '../models/user.js';
  * @param {object} [params=null] - Additional options for the query.
  * @returns {Promise<object|null>} The user object if found, or null if not.
  */
-const getByEmail = async (email, params = null) => {
+const findByEmail = async (email, params = null) => {
   return User.findOne({ where: { email }, ...params });
 };
 
-export default { getByEmail };
+export default { findByEmail };

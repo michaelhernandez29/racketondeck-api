@@ -21,7 +21,7 @@ const create = async (req, res) => {
     return;
   }
 
-  const user = await userService.getByEmail(payload.email, { raw: true });
+  const user = await userService.findByEmail(payload.email, { raw: true });
   if (user) {
     responseHelper.conflict(req, res, errorMessages.DUPLICATE_EMAIL, errorCodes.CONFLICT);
     return;

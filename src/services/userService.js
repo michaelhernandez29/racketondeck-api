@@ -1,4 +1,18 @@
+import _ from 'lodash-es';
+
 import User from '../models/user.js';
+
+/**
+ * Creates a new user in the database.
+ *
+ * @param {object} data - The data for the new user to be created.
+ * @returns {Promise<object>} The created user object with plain data format.
+ */
+const create = async (data) => {
+  let response = await User.create(data);
+  response = response.get({ plain: true });
+  return _.omit(response, 'password');
+};
 
 /**
  * Retrieves a user by email from the database.
@@ -11,4 +25,4 @@ const findByEmail = async (email, params = null) => {
   return User.findOne({ where: { email }, ...params });
 };
 
-export default { findByEmail };
+export default { create, findByEmail };

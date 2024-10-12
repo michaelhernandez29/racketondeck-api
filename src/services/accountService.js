@@ -41,4 +41,15 @@ const create = async (data) => {
   }
 };
 
-export default { create };
+/**
+ * Finds an account by its ID in the database.
+ *
+ * @param {string} id - The unique identifier of the account.
+ * @param {object} [params=null] - Additional query options for finding the account.
+ * @returns {Promise<object|null>} - The account data if found, or null if not.
+ */
+const findById = async (id, params = null) => {
+  return Account.findOne({ where: { id }, ...params });
+};
+
+export default { create, findById };

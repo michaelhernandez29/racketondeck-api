@@ -86,7 +86,7 @@ const User = postgres.define(
       description: 'The role or type of the user in the platform, such as PLAYER, MANAGER, or INSTRUCTOR.',
     },
     phoneNumber: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: true,
       field: 'phone_number',
       description: 'The contact phone number for the user, if provided.',

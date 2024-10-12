@@ -8,16 +8,23 @@ import accountService from '../services/accountService.js';
 import userService from '../services/userService.js';
 
 /**
- * Handler for POST /accounts
+ * Handler for POST /accounts/{accountId}/users
  *
  * @param {Request} req - The Express request object.
  * @param {Response} res - The Express response object.
  */
 const create = async (req, res) => {
+  const { accountId } = req.params;
   const payload = req.body;
 
   if (!validator.isEmail(payload.email)) {
     responseHelper.badRequest(req, res, errorMessages.INVALID_EMAIL_FORMAT, errorCodes.BAD_REQUEST);
+    return;
+  }
+
+  const account = await accountService.findById(accountId, { raw: true });
+  if (!account) {
+    responseHelper.notFound(req, res, errorMessages.ACCOUNT_NOT_FOUND, errorCodes.ACCOUNT_NOT_FOUND);
     return;
   }
 
@@ -27,8 +34,9 @@ const create = async (req, res) => {
     return;
   }
 
+  payload.accountId = accountId;
   payload.password = await cryptoHelper.hash(payload.password);
-  const response = await accountService.create(payload);
+  const response = await userService.create(payload);
 
   responseHelper.created(req, res, response);
 };

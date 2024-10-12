@@ -38,6 +38,7 @@ AccountPostRequestBody:
             type: boolean
             description: Indicates whether the account is enabled or disabled.
             default: true
+        additionalProperties: false
         required:
           - name
           - email

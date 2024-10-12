@@ -16,6 +16,11 @@ export default {
   EMAIL_NOT_FOUND: 'The email address provided does not exist in the system',
 
   /**
+   * ACCOUNT_NOT_FOUND (404): The account associated with the provided identifier does not exist in the system.
+   */
+  ACCOUNT_NOT_FOUND: 'The account associated with the provided identifier does not exist in the system',
+
+  /**
    * DUPLICATE_EMAIL (409): An account with this email address already exists
    * in the system.
    */

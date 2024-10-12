@@ -89,10 +89,8 @@ tags:
     description: Operations related to managing user accounts.
   - name: User Authentication 🔐
     description: Operations related to managing user authentication and security.
-  - name: Staff 👨‍🏫
+  - name: Users 👨‍🏫
     description: Operations related to managing staff members within the academy.
-  - name: Players 🧑‍🤝‍🧑
-    description: Operations related to managing players and their activities.
   - name: User Roles & Permissions 🔑
     description: Operations related to managing staff roles and permissions.
   - name: Applications 📱

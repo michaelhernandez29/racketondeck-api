@@ -33,6 +33,7 @@ AccountPostRequestBody:
               - free: Access to basic features.
               - pro: Access to advanced features.
               - premium: Full access to all platform features.
+            default: free
           enabled:
             type: boolean
             description: Indicates whether the account is enabled or disabled.

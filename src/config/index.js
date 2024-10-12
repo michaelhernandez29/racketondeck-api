@@ -12,6 +12,10 @@ export default {
     bcrypt: {
       saltRounds: Number.parseInt(ENV.SALT_ROUNDS, 10) || 10,
     },
+    jwt: {
+      secret: ENV.JWT_SECRET || 'N4VbHgJfVW7i3NyyhOtzteQimbGc4ByU',
+      expiresIn: ENV.JWT_EXPIRES_IN || '1h',
+    },
   },
   databases: {
     sequelize: {

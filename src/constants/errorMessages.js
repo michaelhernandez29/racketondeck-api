@@ -6,6 +6,16 @@ export default {
   INVALID_EMAIL_FORMAT: 'The email address provided does not match the required format',
 
   /**
+   * INVALID_PASSWORD (400): The password provided is incorrect.
+   */
+  INVALID_PASSWORD: 'The password provided is incorrect',
+
+  /**
+   * EMAIL_NOT_FOUND (404): The email address provided does not exist in the system.
+   */
+  EMAIL_NOT_FOUND: 'The email address provided does not exist in the system',
+
+  /**
    * DUPLICATE_EMAIL (409): An account with this email address already exists
    * in the system.
    */

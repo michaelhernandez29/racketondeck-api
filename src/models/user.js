@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 
-import userTypes from '../constants/userTypes.js';
+import roleTypes from '../constants/roleTypes.js';
 import postgres from '../lib/databases/postgres.js';
 import Account from './account.js';
 
@@ -78,11 +78,11 @@ const User = postgres.define(
       field: 'password',
       description: 'The user’s password, stored securely in an encrypted format.',
     },
-    type: {
+    role: {
       type: DataTypes.ENUM,
-      values: Object.values(userTypes),
+      values: Object.values(roleTypes),
       allowNull: false,
-      field: 'type',
+      field: 'role',
       description: 'The role or type of the user in the platform, such as PLAYER, MANAGER, or INSTRUCTOR.',
     },
     phoneNumber: {

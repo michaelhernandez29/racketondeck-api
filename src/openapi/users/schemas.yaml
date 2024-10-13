@@ -37,7 +37,7 @@ User:
       description: |
         The email address of the user. This email will be used for login and notifications, and must be unique.
       example: johndoe@example.com
-    type:
+    role:
       type: string
       enum:
         - owner
@@ -82,7 +82,7 @@ User:
     - updatedAt
     - name
     - email
-    - type
+    - role
     - phoneNumber
     - profilePicture
     - enabled

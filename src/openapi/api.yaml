@@ -149,11 +149,16 @@ tags:
 paths:
   !!inc/dir [ '.', { whitelist: 'paths', blacklist: ['api', 'schemas', 'requestBodies', 'responses'] }]
 
+security:
+  - Bearer: []
+
 components:
   securitySchemes:
-    ApiGateway:
+    Bearer:
       type: apiKey
-      description: Auth from api-gateway service
+      description: |
+        The Bearer authentication scheme is used for securing API requests by including an access token.
+        The token must be provided in the `Authorization` header in the format `Bearer <token>`.
       name: authorization
       in: header
   schemas:

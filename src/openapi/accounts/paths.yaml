@@ -1,5 +1,6 @@
 /accounts:
   post:
+    security: []
     tags:
       - Accounts 📝
     summary: Create a new account 🆕

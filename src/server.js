@@ -11,11 +11,12 @@ import url from 'url';
 import logger from './helpers/logger.js';
 import openapi from './helpers/openapi.js';
 import postgres from './lib/databases/postgres.js';
+import authHandler from './middlewares/authHandler.js';
 import errorHandler from './middlewares/errorHandler.js';
 import esmResolver from './middlewares/esmResolver.js';
+import requestHandler from './middlewares/requestHandler.js';
 
 import config from './config/index.js';
-import requestHandler from './middlewares/requestHandler.js';
 const appConfig = config.app;
 
 const __filename = url.fileURLToPath(import.meta.url);
@@ -46,6 +47,11 @@ try {
       operationHandlers: {
         basePath: path.join(__dirname, 'controllers'),
         resolver: esmResolver,
+      },
+      validateSecurity: {
+        handlers: {
+          Bearer: authHandler,
+        },
       },
     })
   );

@@ -36,4 +36,14 @@ const sign = (payload) => {
   return jwt.sign(payload, jwtConfig.secret, { expiresIn: jwtConfig.expiresIn });
 };
 
-export default { hash, compare, sign };
+/**
+ * Verifies a JWT token.
+ *
+ * @param {string} token - The JWT token to verify.
+ * @returns {object|boolean} The decoded payload if the token is valid, or `false` if it's invalid.
+ */
+const verify = (token) => {
+  return jwt.verify(token, jwtConfig.secret);
+};
+
+export default { hash, compare, sign, verify };

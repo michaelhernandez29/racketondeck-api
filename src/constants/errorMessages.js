@@ -11,6 +11,16 @@ export default {
   INVALID_PASSWORD: 'The password provided is incorrect',
 
   /**
+   * AUTH_TOKEN_MISSING (401): Access denied. No token provided.
+   */
+  AUTH_TOKEN_MISSING: 'Access denied. No token provided',
+
+  /**
+   * INVALID_AUTH_TOKEN (401): The token provided is invalid or expired.
+   */
+  INVALID_AUTH_TOKEN: 'Invalid token provided or expired',
+
+  /**
    * EMAIL_NOT_FOUND (404): The email address provided does not exist in the system.
    */
   EMAIL_NOT_FOUND: 'The email address provided does not exist in the system',

@@ -1,5 +1,6 @@
 /auth/login:
   post:
+    security: []
     tags:
       - User Authentication 🔐
     summary: Log in to an existing account 🔑

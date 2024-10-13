@@ -176,12 +176,14 @@ NotFound:
               - NOT_FOUND
               - ACCOUNT_NOT_FOUND
               - USER_NOT_FOUND
+              - ACADEMY_NOT_FOUND
             description: |
               Possible error codes:
 
               - `NOT_FOUND`: Indicates that the requested resource was not found.
               - `ACCOUNT_NOT_FOUND`: Indicates that the specified account was not found in the system.
               - `USER_NOT_FOUND`: Indicates that the specified user was not found in the system.
+              - `ACADEMY_NOT_FOUND`: Indicates that the specified academy was not found in the system.
         required:
           - statusCode
           - message

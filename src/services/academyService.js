@@ -15,6 +15,17 @@ const create = async (data) => {
 };
 
 /**
+ * Retrieves a academy by id from the database.
+ *
+ * @param {string} id - The id of the academy to be retrieved.
+ * @param {object} [params=null] - Additional options for the query.
+ * @returns {Promise<object|null>} The academy object if found, or null if not.
+ */
+const findById = async (id, params = null) => {
+  return Academy.findOne({ where: { id }, ...params });
+};
+
+/**
  * Finds and counts academies based on provided filters and pagination options.
  *
  * @param {object} filters - The filters and pagination options to apply.
@@ -39,4 +50,4 @@ const findAndCountAll = async (filters, params = null) => {
   return Academy.findAndCountAll({ where, order: orderClause, offset, limit, ...params });
 };
 
-export default { create, findAndCountAll };
+export default { create, findById, findAndCountAll };

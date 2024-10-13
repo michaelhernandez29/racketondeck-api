@@ -112,4 +112,29 @@ const update = async (req, res) => {
   responseHelper.ok(req, res, response);
 };
 
-export { create, findAndCountAll, findById, update };
+/**
+ * Handler for DELETE /accounts/{accountId}/users/{userId}
+ *
+ * @param {Request} req - The Express request object.
+ * @param {Response} res - The Express response object.
+ */
+const remove = async (req, res) => {
+  const { accountId, userId } = req.params;
+
+  const account = await accountService.findById(accountId, { raw: true });
+  if (!account) {
+    responseHelper.notFound(req, res, errorMessages.ACCOUNT_NOT_FOUND, errorCodes.ACCOUNT_NOT_FOUND);
+    return;
+  }
+
+  const user = await userService.findById(userId, { raw: true });
+  if (!user) {
+    responseHelper.notFound(req, res, errorMessages.USER_NOT_FOUND, errorCodes.USER_NOT_FOUND);
+    return;
+  }
+
+  await userService.remove(userId);
+  responseHelper.noContent(req, res);
+};
+
+export { create, findAndCountAll, findById, remove, update };

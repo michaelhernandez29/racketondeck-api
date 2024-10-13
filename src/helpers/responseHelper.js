@@ -83,6 +83,22 @@ const created = (req, res, data = null) => {
 };
 
 /**
+ * Sends a 204 No Content response.
+ *
+ * @param {object} req - Express request object.
+ * @param {object} res - Express response object.
+ */
+const noContent = (req, res) => {
+  const response = {
+    statusCode: StatusCodes.NO_CONTENT,
+    message: ReasonPhrases.NO_CONTENT,
+  };
+
+  logger.info(_generateLog(req, response));
+  res.status(response.statusCode).json(response);
+};
+
+/**
  * Sends a 400 Bad Request response.
  *
  * @param {object} req - Express request object.
@@ -219,4 +235,4 @@ const custom = (req, res, statusCode, message, errorCode = null) => {
   res.status(response.statusCode).json(response);
 };
 
-export default { ok, created, badRequest, unauthorized, forbidden, notFound, conflict, error, custom };
+export default { ok, created, noContent, badRequest, unauthorized, forbidden, notFound, conflict, error, custom };

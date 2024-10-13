@@ -80,4 +80,14 @@ const update = async (id, data, params = null) => {
   return _.omit(user, 'password');
 };
 
-export default { create, findByEmail, findById, findAndCountAll, update };
+/**
+ * Deletes a user from the database.
+ *
+ * @param {string} id - The ID of the user to be deleted.
+ * @returns {Promise<void>} Resolves when the user has been successfully deleted.
+ */
+const remove = async (id) => {
+  await User.destroy({ where: { id } });
+};
+
+export default { create, findByEmail, findById, findAndCountAll, update, remove };

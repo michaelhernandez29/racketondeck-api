@@ -1,4 +1,4 @@
-Account:
+AccountCreated:
   description: Account successfully created
   content:
     application/json:

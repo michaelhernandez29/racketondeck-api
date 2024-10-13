@@ -93,8 +93,8 @@ tags:
     description: Operations related to managing staff members within the academy.
   - name: User Roles & Permissions 🔑
     description: Operations related to managing staff roles and permissions.
-  - name: Applications 📱
-    description: Operations related to managing padel academies.
+  - name: Academies 🏫
+    description: Operations related to managing academies.
   - name: Customizations ⚙️
     description: Operations related to customizing features and settings.
   - name: Courts 🎾

@@ -15,7 +15,7 @@
       $ref: '#/components/requestBodies/AccountPostRequestBody'
     responses:
       201:
-        $ref: '#/components/responses/Account'
+        $ref: '#/components/responses/AccountCreated'
       400:
         $ref: '#/components/responses/BadRequest'
       409:

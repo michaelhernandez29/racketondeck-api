@@ -1,0 +1,25 @@
+/accounts/{accountId}/academies:
+  post:
+    tags:
+      - Academies 🏫
+    summary: Create a new academy 🆕
+    description: |
+      Creates a new academy in the RacketOnDeck platform. This endpoint allows an authenticated user to register a new
+      academy by providing details such as name, description, and contact information.
+    x-eov-operation-handler: academyController
+    operationId: create
+    requestBody:
+      $ref: '#/components/requestBodies/AcademyPostRequestBody'
+    responses:
+      201:
+        $ref: '#/components/responses/AcademyCreated'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'

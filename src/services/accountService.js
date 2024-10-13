@@ -1,5 +1,5 @@
 import errorMessages from '../constants/errorMessages.js';
-import userTypes from '../constants/userTypes.js';
+import roleTypes from '../constants/roleTypes.js';
 import logger from '../helpers/logger.js';
 import postgres from '../lib/databases/postgres.js';
 import Account from '../models/account.js';
@@ -24,7 +24,7 @@ const create = async (data) => {
 
     const userData = {
       accountId: account.id,
-      type: userTypes.OWNER,
+      type: roleTypes.OWNER,
       name: data.name,
       email: data.email,
       password: data.password,

@@ -49,12 +49,12 @@ const ok = (req, res, data = null, count = null) => {
     message: ReasonPhrases.OK,
   };
 
-  if (!_.isNil(data)) {
-    response.data = data;
-  }
-
   if (!_.isNil(count)) {
     response.count = count;
+  }
+
+  if (!_.isNil(data)) {
+    response.data = data;
   }
 
   logger.info(_generateLog(req, response));

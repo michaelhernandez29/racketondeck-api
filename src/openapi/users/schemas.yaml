@@ -40,21 +40,21 @@ User:
     type:
       type: string
       enum:
+        - owner
         - admin
         - manager
         - coordinator
         - instructor
-        - staff
         - player
       description: |
         The role assigned to the user, which defines their permissions and access levels on the platform.
         Possible roles include:
 
+        - owner: Ultimate authority over the platform, with full control over all settings, users, and permissions.
         - admin: Full platform access.
         - manager: Manage teams or accounts.
         - coordinator: Organize and coordinate activities.
         - instructor: Manage and coach players.
-        - staff: Limited access for assisting with platform management.
         - player: User with access to player-specific features.
       example: player
     phoneNumber:

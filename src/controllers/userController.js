@@ -41,4 +41,25 @@ const create = async (req, res) => {
   responseHelper.created(req, res, response);
 };
 
-export { create };
+/**
+ * Handler for GET /accounts/{accountId}/users
+ *
+ * @param {Request} req - The Express request object.
+ * @param {Response} res - The Express response object.
+ */
+const findAndCountAll = async (req, res) => {
+  const { accountId } = req.params;
+  const queries = req.query;
+
+  const account = await accountService.findById(accountId, { raw: true });
+  if (!account) {
+    responseHelper.notFound(req, res, errorMessages.ACCOUNT_NOT_FOUND, errorCodes.ACCOUNT_NOT_FOUND);
+    return;
+  }
+
+  const filters = { accountId, ...queries };
+  const response = await userService.findAndCountAll(filters, { raw: true, attributes: { exclude: ['password'] } });
+  responseHelper.ok(req, res, response.rows, response.count);
+};
+
+export { create, findAndCountAll };

@@ -29,7 +29,6 @@ UserPostRequestBody:
               - manager
               - coordinator
               - instructor
-              - staff
               - player
             description: |
               The role of the user within the system. This defines the permissions and areas of the platform

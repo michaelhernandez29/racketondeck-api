@@ -30,12 +30,6 @@ export default {
   INSTRUCTOR: 'instructor',
 
   /**
-   * STAFF: General staff members who assist in the daily operations of the platform
-   * but may have limited permissions compared to managers or admins.
-   */
-  STAFF: 'staff',
-
-  /**
    * PLAYER: A user role representing a player who participates in training sessions,
    * tournaments, or activities within the platform.
    */

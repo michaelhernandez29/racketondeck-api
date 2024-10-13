@@ -1,6 +1,6 @@
 import _ from 'lodash-es';
-
 import { Op } from 'sequelize';
+
 import User from '../models/user.js';
 
 /**
@@ -24,6 +24,17 @@ const create = async (data) => {
  */
 const findByEmail = async (email, params = null) => {
   return User.findOne({ where: { email }, ...params });
+};
+
+/**
+ * Retrieves a user by id from the database.
+ *
+ * @param {string} id - The id of the user to be retrieved.
+ * @param {object} [params=null] - Additional options for the query.
+ * @returns {Promise<object|null>} The user object if found, or null if not.
+ */
+const findById = async (id, params = null) => {
+  return User.findOne({ where: { id }, ...params });
 };
 
 /**
@@ -55,4 +66,18 @@ const findAndCountAll = async (filters, params = null) => {
   return User.findAndCountAll({ where, order: orderClause, offset, limit, ...params });
 };
 
-export default { create, findByEmail, findAndCountAll };
+/**
+ * Updates an existing user in the database.
+ *
+ * @param {string} id - The ID of the user to be updated.
+ * @param {object} data - The updated data for the user.
+ * @param {object} [params=null] - Additional options for the update query.
+ * @returns {Promise<object>} The updated user object, excluding the password.
+ */
+const update = async (id, data, params = null) => {
+  const response = await User.update(data, { where: { id }, ...params });
+  let user = response[1][0];
+  return _.omit(user, 'password');
+};
+
+export default { create, findByEmail, findById, findAndCountAll, update };

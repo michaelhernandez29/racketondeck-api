@@ -84,7 +84,7 @@ BadRequest:
             type: string
             enum:
               - BAD_REQUEST
-            description: >
+            description: |
               Possible error codes:
 
               - `BAD_REQUEST`: Indicates a bad request error.'
@@ -114,7 +114,7 @@ Unauthorized:
             type: string
             enum:
               - UNAUTHORIZED
-            description: >
+            description: |
               Possible error codes:
 
               - `UNAUTHORIZED`: Indicates an unauthorized error.'
@@ -144,7 +144,7 @@ Forbidden:
             type: string
             enum:
               - FORBIDDEN
-            description: >
+            description: |
               Possible error codes:
 
               - `FORBIDDEN`: Indicates a forbidden error.'
@@ -175,11 +175,13 @@ NotFound:
             enum:
               - NOT_FOUND
               - ACCOUNT_NOT_FOUND
-            description: >
+              - USER_NOT_FOUND
+            description: |
               Possible error codes:
 
               - `NOT_FOUND`: Indicates that the requested resource was not found.
               - `ACCOUNT_NOT_FOUND`: Indicates that the specified account was not found in the system.
+              - `USER_NOT_FOUND`: Indicates that the specified user was not found in the system.
         required:
           - statusCode
           - message
@@ -206,7 +208,7 @@ Conflict:
             type: string
             enum:
               - CONFLICT
-            description: >
+            description: |
               Possible error codes:
 
               - `CONFLICT`: Indicates a conflict error.'
@@ -236,7 +238,7 @@ InternalServerError:
             type: string
             enum:
               - INTERNAL_SERVER_ERROR
-            description: >
+            description: |
               Possible error codes:
 
               - `INTERNAL_SERVER_ERROR`: Indicates an error.'

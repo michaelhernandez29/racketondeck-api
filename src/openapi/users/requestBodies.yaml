@@ -58,3 +58,47 @@ UserPostRequestBody:
           - password
           - type
   required: true
+
+UserPutRequestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            description: |
+              The full name of the user. This will be displayed across the platform and should reflect the user's
+              real or preferred name.
+            example: 'John Doe'
+          type:
+            type: string
+            enum:
+              - admin
+              - manager
+              - coordinator
+              - instructor
+              - player
+            description: |
+              The role of the user within the system. This defines the permissions and areas of the platform
+              the user has access to.
+            example: 'player'
+          phoneNumber:
+            type: integer
+            description: |
+              The user's phone number for contact purposes. This may be used for notifications or support.
+            example: 1234567890
+          profilePicture:
+            type: string
+            description: |
+              The URL to the user's profile picture. This will be displayed in their profile and other
+              areas where their avatar is shown.
+            example: 'https://example.com/images/profile/johndoe.png'
+          enabled:
+            type: boolean
+            description: |
+              Indicates whether the user's account is active or disabled. If disabled, the user will not
+              be able to log in or access the platform.
+            default: true
+        additionalProperties: false
+  required: true

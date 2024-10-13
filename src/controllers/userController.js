@@ -62,4 +62,30 @@ const findAndCountAll = async (req, res) => {
   responseHelper.ok(req, res, response.rows, response.count);
 };
 
-export { create, findAndCountAll };
+/**
+ * Handler for PUT /accounts/{accountId}/users/{userId}
+ *
+ * @param {Request} req - The Express request object.
+ * @param {Response} res - The Express response object.
+ */
+const update = async (req, res) => {
+  const { accountId, userId } = req.params;
+  const payload = req.body;
+
+  const account = await accountService.findById(accountId, { raw: true });
+  if (!account) {
+    responseHelper.notFound(req, res, errorMessages.ACCOUNT_NOT_FOUND, errorCodes.ACCOUNT_NOT_FOUND);
+    return;
+  }
+
+  const user = await userService.findById(userId, { raw: true });
+  if (!user) {
+    responseHelper.notFound(req, res, errorMessages.USER_NOT_FOUND, errorCodes.USER_NOT_FOUND);
+    return;
+  }
+
+  const response = await userService.update(userId, payload, { raw: true, returning: true });
+  responseHelper.ok(req, res, response);
+};
+
+export { create, findAndCountAll, update };

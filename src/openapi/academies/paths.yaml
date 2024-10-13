@@ -8,6 +8,15 @@
       academy by providing details such as name, description, and contact information.
     x-eov-operation-handler: academyController
     operationId: create
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the account to which the academies belong.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440000'
     requestBody:
       $ref: '#/components/requestBodies/AcademyPostRequestBody'
     responses:

@@ -63,6 +63,30 @@ const findAndCountAll = async (req, res) => {
 };
 
 /**
+ * Handler for GET /accounts/{accountId}/users/{userId}
+ *
+ * @param {Request} req - The Express request object.
+ * @param {Response} res - The Express response object.
+ */
+const findById = async (req, res) => {
+  const { accountId, userId } = req.params;
+
+  const account = await accountService.findById(accountId, { raw: true });
+  if (!account) {
+    responseHelper.notFound(req, res, errorMessages.ACCOUNT_NOT_FOUND, errorCodes.ACCOUNT_NOT_FOUND);
+    return;
+  }
+
+  const user = await userService.findById(userId, { raw: true, attributes: { exclude: ['password'] } });
+  if (!user) {
+    responseHelper.notFound(req, res, errorMessages.USER_NOT_FOUND, errorCodes.USER_NOT_FOUND);
+    return;
+  }
+
+  responseHelper.ok(req, res, user);
+};
+
+/**
  * Handler for PUT /accounts/{accountId}/users/{userId}
  *
  * @param {Request} req - The Express request object.
@@ -88,4 +112,4 @@ const update = async (req, res) => {
   responseHelper.ok(req, res, response);
 };
 
-export { create, findAndCountAll, update };
+export { create, findAndCountAll, findById, update };

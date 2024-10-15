@@ -25,4 +25,25 @@ const create = async (req, res) => {
   responseHelper.created(req, res, response);
 };
 
-export { create };
+/**
+ * Handler for GET /academies/{academyId}/courts
+ *
+ * @param {Request} req - The Express request object.
+ * @param {Response} res - The Express response object.
+ */
+const findAndCountAll = async (req, res) => {
+  const { academyId } = req.params;
+  const queries = req.query;
+
+  const academy = await academyService.findById(academyId, { raw: true });
+  if (!academy) {
+    responseHelper.notFound(req, res, errorMessages.ACADEMY_NOT_FOUND, errorCodes.ACADEMY_NOT_FOUND);
+    return;
+  }
+
+  const filters = { academyId, ...queries };
+  const response = await courtService.findAndCountAll(filters, { raw: true });
+  responseHelper.ok(req, res, response.rows, response.count);
+};
+
+export { create, findAndCountAll };

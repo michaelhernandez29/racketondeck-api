@@ -50,4 +50,17 @@ const findAndCountAll = async (filters, params = null) => {
   return Academy.findAndCountAll({ where, order: orderClause, offset, limit, ...params });
 };
 
-export default { create, findById, findAndCountAll };
+/**
+ * Updates an existing academy in the database.
+ *
+ * @param {string} id - The ID of the academy to be updated.
+ * @param {object} data - The updated data for the academy.
+ * @param {object} [params=null] - Additional options for the update query.
+ * @returns {Promise<object>} The updated academy object.
+ */
+const update = async (id, data, params = null) => {
+  const response = await Academy.update(data, { where: { id }, ...params });
+  return response[1][0];
+};
+
+export default { create, findById, findAndCountAll, update };

@@ -168,3 +168,44 @@
         $ref: '#/components/responses/NotFound'
       500:
         $ref: '#/components/responses/InternalServerError'
+  put:
+    tags:
+      - Academies 🏫
+    summary: Update an existing academy ✏️
+    description: |
+      Updates the details of an existing academy in the RacketOnDeck platform. This endpoint allows an authenticated
+      user to modify the name, description, and contact information of the specified academy.
+    x-eov-operation-handler: academyController
+    operationId: update
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the account to which the academy belongs.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440000'
+      - name: academyId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the academy to update.
+        schema:
+          type: string
+          format: uuid
+          example: '450e8400-e29b-41d4-a716-446655440111'
+    requestBody:
+      $ref: '#/components/requestBodies/AcademyPutRequestBody'
+    responses:
+      200:
+        $ref: '#/components/responses/AcademyUpdated'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'

@@ -1,4 +1,5 @@
 UserPostRequestBody:
+  required: true
   content:
     application/json:
       schema:
@@ -57,9 +58,10 @@ UserPostRequestBody:
           - email
           - password
           - role
-  required: true
+
 
 UserPutRequestBody:
+  required: true
   content:
     application/json:
       schema:
@@ -101,4 +103,4 @@ UserPutRequestBody:
               be able to log in or access the platform.
             default: true
         additionalProperties: false
-  required: true
+

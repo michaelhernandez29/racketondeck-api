@@ -1,4 +1,5 @@
 AccountPostRequestBody:
+  required: true
   content:
     application/json:
       schema:
@@ -44,4 +45,3 @@ AccountPostRequestBody:
           - email
           - password
           - type
-  required: true

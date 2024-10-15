@@ -1,4 +1,5 @@
 LoginRequestBody:
+  required: true
   content:
     application/json:
       schema:
@@ -19,4 +20,4 @@ LoginRequestBody:
         required:
           - email
           - password
-  required: true
+

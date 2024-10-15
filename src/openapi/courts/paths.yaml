@@ -128,3 +128,43 @@
         $ref: '#/components/responses/NotFound'
       500:
         $ref: '#/components/responses/InternalServerError'
+
+/academies/{academyId}/courts/{courtId}:
+  get:
+    tags:
+      - Courts 🎾
+    summary: Retrieve a specific court for a given academy 📋
+    description: |
+      Retrieves details of a specific court by its unique identifier (courtId) for the given academy (academyId).
+    x-eov-operation-handler: courtController
+    operationId: findById
+    parameters:
+      - name: academyId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the academy to which the court belongs.
+        schema:
+          type: string
+          format: uuid
+          example: '450e8400-e29b-41d4-a716-446655440111'
+      - name: courtId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the court to retrieve.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440222'
+    responses:
+      200:
+        $ref: '#/components/responses/CourtRetrieved'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'

@@ -41,6 +41,11 @@ export default {
   ACADEMY_NOT_FOUND: 'The academy associated with the provided identifier does not exist in the system',
 
   /**
+   * COURT_NOT_FOUND (404): The court associated with the provided identifier does not exist in the system.
+   */
+  COURT_NOT_FOUND: 'The court associated with the provided identifier does not exist in the system',
+
+  /**
    * DUPLICATE_EMAIL (409): An account with this email address already exists
    * in the system.
    */

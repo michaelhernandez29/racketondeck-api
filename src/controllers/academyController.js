@@ -96,4 +96,29 @@ const update = async (req, res) => {
   responseHelper.ok(req, res, response);
 };
 
-export { create, findAndCountAll, findById, update };
+/**
+ * Handler for DELETE /accounts/{accountId}/academies/{academyId}
+ *
+ * @param {Request} req - The Express request object.
+ * @param {Response} res - The Express response object.
+ */
+const remove = async (req, res) => {
+  const { accountId, academyId } = req.params;
+
+  const account = await accountService.findById(accountId, { raw: true });
+  if (!account) {
+    responseHelper.notFound(req, res, errorMessages.ACCOUNT_NOT_FOUND, errorCodes.ACCOUNT_NOT_FOUND);
+    return;
+  }
+
+  const academy = await academyService.findById(academyId, { raw: true });
+  if (!academy) {
+    responseHelper.notFound(req, res, errorMessages.ACADEMY_NOT_FOUND, errorCodes.ACADEMY_NOT_FOUND);
+    return;
+  }
+
+  await academyService.remove(academyId);
+  responseHelper.noContent(req, res);
+};
+
+export { create, findAndCountAll, findById, remove, update };

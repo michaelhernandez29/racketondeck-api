@@ -50,4 +50,17 @@ const findAndCountAll = async (filters, params = null) => {
   return Court.findAndCountAll({ where, order: orderClause, offset, limit, ...params });
 };
 
-export default { create, findById, findAndCountAll };
+/**
+ * Updates an existing court in the database.
+ *
+ * @param {string} id - The ID of the court to be updated.
+ * @param {object} data - The updated data for the court.
+ * @param {object} [params=null] - Additional options for the update query.
+ * @returns {Promise<object>} The updated court object.
+ */
+const update = async (id, data, params = null) => {
+  const response = await Court.update(data, { where: { id }, ...params });
+  return response[1][0];
+};
+
+export default { create, findById, findAndCountAll, update };

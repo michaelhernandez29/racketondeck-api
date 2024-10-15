@@ -70,4 +70,30 @@ const findById = async (req, res) => {
   responseHelper.ok(req, res, court);
 };
 
-export { create, findAndCountAll, findById };
+/**
+ * Handler for PUT /academies/{academyId}/courts/{courtId}
+ *
+ * @param {Request} req - The Express request object.
+ * @param {Response} res - The Express response object.
+ */
+const update = async (req, res) => {
+  const { academyId, courtId } = req.params;
+  const payload = req.body;
+
+  const academy = await academyService.findById(academyId, { raw: true });
+  if (!academy) {
+    responseHelper.notFound(req, res, errorMessages.ACADEMY_NOT_FOUND, errorCodes.ACADEMY_NOT_FOUND);
+    return;
+  }
+
+  const court = await courtService.findById(courtId, { raw: true });
+  if (!court) {
+    responseHelper.notFound(req, res, errorMessages.COURT_NOT_FOUND, errorCodes.COURT_NOT_FOUND);
+    return;
+  }
+
+  const response = await courtService.update(courtId, payload, { raw: true, returning: true });
+  responseHelper.ok(req, res, response);
+};
+
+export { create, findAndCountAll, findById, update };

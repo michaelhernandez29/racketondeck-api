@@ -1,0 +1,34 @@
+/academies/{academyId}/courts:
+  post:
+    tags:
+      - Courts 🎾
+    summary: Create a new court 🆕
+    description: |
+      Creates a new court in the RacketOnDeck platform. This endpoint allows an authenticated user to register a new
+      court by providing details such as name, type, and availability.
+    x-eov-operation-handler: courtController
+    operationId: create
+    parameters:
+      - name: academyId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the academy to retrieve.
+        schema:
+          type: string
+          format: uuid
+          example: '450e8400-e29b-41d4-a716-446655440111'
+    requestBody:
+      $ref: '#/components/requestBodies/CourtPostRequestBody'
+    responses:
+      201:
+        $ref: '#/components/responses/CourtCreated'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'

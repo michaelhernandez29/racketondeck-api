@@ -63,4 +63,14 @@ const update = async (id, data, params = null) => {
   return response[1][0];
 };
 
-export default { create, findById, findAndCountAll, update };
+/**
+ * Deletes a court from the database.
+ *
+ * @param {string} id - The ID of the court to be deleted.
+ * @returns {Promise<void>} Resolves when the court has been successfully deleted.
+ */
+const remove = async (id) => {
+  await Court.destroy({ where: { id } });
+};
+
+export default { create, findById, findAndCountAll, update, remove };

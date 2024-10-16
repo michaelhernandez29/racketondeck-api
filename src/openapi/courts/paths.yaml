@@ -209,3 +209,42 @@
         $ref: '#/components/responses/NotFound'
       500:
         $ref: '#/components/responses/InternalServerError'
+  delete:
+    tags:
+      - Courts 🎾
+    summary: Delete an existing court 🗑️
+    description: |
+      Deletes a specified court from the RacketOnDeck platform. This endpoint allows an authenticated user to remove
+      a court identified by the courtId from the academy identified by the academyId.
+    x-eov-operation-handler: courtController
+    operationId: remove
+    parameters:
+      - name: academyId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the academy to which the court belongs.
+        schema:
+          type: string
+          format: uuid
+          example: '450e8400-e29b-41d4-a716-446655440111'
+      - name: courtId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the court to delete.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440222'
+    responses:
+      204:
+        $ref: '#/components/responses/NoContent'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'

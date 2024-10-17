@@ -22,4 +22,14 @@ const findAndCountAllByUserId = async (id, params = null) => {
   return AccountPermission.findAndCountAll({ where: { id }, ...params });
 };
 
-export default { create, findAndCountAllByUserId };
+/**
+ * Deletes an account permission from the database.
+ *
+ * @param {string} id - The ID of the account permission to be deleted.
+ * @returns {Promise<void>} Resolves when the account permission has been successfully deleted.
+ */
+const remove = async (id) => {
+  await AccountPermission.destroy({ where: { id } });
+};
+
+export default { create, findAndCountAllByUserId, remove };

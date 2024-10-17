@@ -57,4 +57,29 @@ const findAndCountAllByUserId = async (req, res) => {
   responseHelper.ok(req, res, response.rows, response.count);
 };
 
-export { create, findAndCountAllByUserId };
+/**
+ * Handler for DELETE /accounts/{accountId}/users/{userId}/permissions/{permissionId}
+ *
+ * @param {Request} req - The Express request object.
+ * @param {Response} res - The Express response object.
+ */
+const remove = async (req, res) => {
+  const { accountId, userId, permissionId } = req.params;
+
+  const account = await accountService.findById(accountId, { raw: true });
+  if (!account) {
+    responseHelper.notFound(req, res, errorMessages.ACCOUNT_NOT_FOUND, errorCodes.ACCOUNT_NOT_FOUND);
+    return;
+  }
+
+  const user = await userService.findById(userId, { raw: true });
+  if (!user) {
+    responseHelper.notFound(req, res, errorMessages.USER_NOT_FOUND, errorCodes.USER_NOT_FOUND);
+    return;
+  }
+
+  await accountPermissionService.remove(permissionId);
+  responseHelper.noContent(req, res);
+};
+
+export { create, findAndCountAllByUserId, remove };

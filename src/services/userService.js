@@ -7,10 +7,11 @@ import User from '../models/user.js';
  * Creates a new user in the database.
  *
  * @param {object} data - The data for the new user to be created.
+ * @param {object} [params=null] - Additional options for the query.
  * @returns {Promise<object>} The created user object with plain data format.
  */
-const create = async (data) => {
-  let response = await User.create(data);
+const create = async (data, params = null) => {
+  let response = await User.create(data, { ...params });
   response = response.get({ plain: true });
   return _.omit(response, 'password');
 };

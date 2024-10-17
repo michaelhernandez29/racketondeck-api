@@ -1,9 +1,29 @@
 import errorMessages from '../constants/errorMessages.js';
+import permissionTypes from '../constants/permissionTypes.js';
 import roleTypes from '../constants/roleTypes.js';
 import logger from '../helpers/logger.js';
 import postgres from '../lib/databases/postgres.js';
 import Account from '../models/account.js';
-import User from '../models/user.js';
+import AccountPermission from '../models/accountPermission.js';
+import userService from './userService.js';
+
+/**
+ * Assigns permissions to a user for an account.
+ *
+ * @private
+ * @param {string} accountId - The unique identifier of the account.
+ * @param {string} userId - The unique identifier of the user.
+ * @param {object} transaction - The transaction object.
+ * @returns {Promise<void>} - Resolves when permissions are created.
+ */
+const _assignPermissions = async (accountId, userId, transaction) => {
+  const permissions = [
+    { accountId, userId, permission: permissionTypes.ADMIN },
+    { accountId, userId, permission: permissionTypes.WRITE },
+    { accountId, userId, permission: permissionTypes.READ },
+  ];
+  await AccountPermission.bulkCreate(permissions, { transaction });
+};
 
 /**
  * Creates a new account and user in the database within a transaction.
@@ -24,13 +44,14 @@ const create = async (data) => {
 
     const userData = {
       accountId: account.id,
-      type: roleTypes.OWNER,
+      role: roleTypes.OWNER,
       name: data.name,
       email: data.email,
       password: data.password,
     };
-    await User.create(userData, { transaction });
+    const user = await userService.create(userData, { transaction });
 
+    await _assignPermissions(account.id, user.id, transaction);
     await transaction.commit();
     return account.get({ plain: true });
   } catch (error) {

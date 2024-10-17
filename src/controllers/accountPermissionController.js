@@ -32,4 +32,29 @@ const create = async (req, res) => {
   responseHelper.created(req, res, response);
 };
 
-export { create };
+/**
+ * Handler for GET /accounts/{accountId}/users/{userId}/permissions
+ *
+ * @param {Request} req - The Express request object.
+ * @param {Response} res - The Express response object.
+ */
+const findAndCountAllByUserId = async (req, res) => {
+  const { accountId, userId } = req.params;
+
+  const account = await accountService.findById(accountId, { raw: true });
+  if (!account) {
+    responseHelper.notFound(req, res, errorMessages.ACCOUNT_NOT_FOUND, errorCodes.ACCOUNT_NOT_FOUND);
+    return;
+  }
+
+  const user = await userService.findById(userId, { raw: true });
+  if (!user) {
+    responseHelper.notFound(req, res, errorMessages.USER_NOT_FOUND, errorCodes.USER_NOT_FOUND);
+    return;
+  }
+
+  const response = await accountPermissionService.findAndCountAllByUserId(userId, { raw: true });
+  responseHelper.ok(req, res, response.rows, response.count);
+};
+
+export { create, findAndCountAllByUserId };

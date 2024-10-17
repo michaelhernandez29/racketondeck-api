@@ -11,4 +11,15 @@ const create = async (data) => {
   return response.get({ plain: true });
 };
 
-export default { create };
+/**
+ * Finds an account permission by the user ID.
+ *
+ * @param {string} id - The unique identifier (UUID) of the user.
+ * @param {object} [params=null] - Additional query parameters for the search.
+ * @returns {Promise<object|null>} A promise that resolves to the found account permission object or null if not found.
+ */
+const findAndCountAllByUserId = async (id, params = null) => {
+  return AccountPermission.findAndCountAll({ where: { id }, ...params });
+};
+
+export default { create, findAndCountAllByUserId };

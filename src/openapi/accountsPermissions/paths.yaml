@@ -40,3 +40,44 @@
         $ref: '#/components/responses/NotFound'
       500:
         $ref: '#/components/responses/InternalServerError'
+
+  get:
+    tags:
+      - User Roles & Permissions 🔑
+    summary: Get user permissions within an account 🔍
+    description: |
+      Retrieves the list of permissions assigned to a specific user within the given account. This endpoint allows an
+      authenticated user to view what permissions, such as 'READ', 'WRITE', or 'ADMIN', have been granted to a user in
+      the account.
+    x-eov-operation-handler: accountPermissionController
+    operationId: findAndCountAllByUserId
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the account from which the permissions will be retrieved.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440000'
+      - name: userId
+        in: path
+        required: true
+        description: The unique identifier (UUID) of the user whose permissions will be retrieved.
+        schema:
+          type: string
+          format: uuid
+          example: '550e8400-e29b-41d4-a716-446655440111'
+    responses:
+      200:
+        $ref: '#/components/responses/UserPermissionsRetrieved'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'
